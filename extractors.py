@@ -330,17 +330,16 @@ def other_causes_excluded(text):
 
 
 def comorbid_conditions_assessed(text):
-    result=""
-    result +=_first_sentence(text, [re.compile(p, re.I) for p in (
-        r"\b(mental\s+health|psychiatric|psychological|medical\s+condition|comorbid\w*|co-?occurring|co-?existing|other\s+condition|concerns?|)\b",
+    return _first_sentence(text, [re.compile(p, re.I) for p in (
+        r"\b(mental\s+health|psychiatric|psychological|medical\s+condition|comorbid\w*|co-?occurring|co-?existing|other\s+condition|concerns?)\b",
         r"\b(assess\w*|evaluat\w*|address\w*|review\w*|consider\w*|screen\w*)?\b",
         r"\b(procedure|surgery|operation|treatment|intervention|goals?)?\b",
         r"\b(affect(s|ed|ing)?|impact(s|ed|ing)?|interfere(s|d|ing)?(\s+with)?|prevent(s|ed|ing)?|compromise(s|d|ing)?)\b")])
 
 def significant_concerns_well_controlled(text):
-    return _first_sentence(text, [re.compile(p, re.I) for p in (
-        r"\b(mental\s+health|psychiatric|medical|behavioral|comorbid\w*|concern|condition|depress\w*|anxiety|mood|disorder|illness|symptom|PTSD|bipolar|substance)\b",
-        r"\b(well[\s-]?controlled|reasonably\s+(well\s+)?controlled|stable|in\s+(stable\s+)?remission|managed|adequately\s+(managed|controlled))\b")])
+    return _find_all(text, [re.compile(p, re.I) for p in (
+        r"\b(mental\s+health|psychiatric|behavioral|medical\s+condition|comorbid\w*|concern|condition|depress\w*|anxiety|mood|disorder|illness|symptom|co-?occurring|co-?existing|other\s+condition)\b",
+        r"\b(procedure|surgery|operation|treatment|intervention|goals?)|((affect(s|ed|ing)?|impact(s|ed|ing)?|interfere(s|d|ing)?(\s+with)?|prevent(s|ed|ing)?|compromise(s|d|ing))|assess\w*|evaluat\w*|address\w*|review\w*|consider\w*|screen\w*|well[\s-]?controlled|reasonably\s+(well\s+)?controlled|stable|in\s+(stable\s+)?remission|managed|adequately\s+(managed|controlled))\b")])
 
 def understands_reproductive_effects(text):
     return _both(text,
@@ -368,6 +367,11 @@ def diagnostic_assessment_included(text):
         re.compile(r"\b(complet\w*|includ\w*|attach\w*|perform\w*|conduct\w*|provid\w*|enclos\w*|recent)\b", re.I))
 
 def clinical_rationale_for_surgery(text):
+    return _find_all(text, [re.compile(p, re.I) for p in (
+        r"\b(decrease|improve|alleviate|treat|progress)\b",
+        r"\b(surger\w*|surgical|procedure|treatment|request|function\w*|dysphoria|incongruence|distress)\b")])
+
+def clinical_rationale_for_surgery_old(text):
     return _find_all(text, [re.compile(p, re.I) for p in (
         r"\b(rationale|clinical\s+reasoning|justification|recommend\w*|support\w*)\b",
         r"\b(surger\w*|surgical|procedure|treatment|request)\b")])
