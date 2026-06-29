@@ -1,16 +1,16 @@
 import io
 
-import fitz                 # PyMuPDF
+import fitz
 import cv2
 import numpy as np
 from PIL import Image
 import pytesseract
 
-# --- Windows: if Tesseract isn't on your PATH, point pytesseract at the binary.
+# Windows: if Tesseract isn't on your PATH, point pytesseract at the binary.
 # Install the UB Mannheim build first: https://github.com/UB-Mannheim/tesseract/wiki
-# then uncomment and adjust this to your install path:
-pytesseract.pytesseract.tesseract_cmd = r"C:\Users\dyqi1\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
-#C:\Users\dyqi1\AppData\Local\Programs\Tesseract-OCR
+# adjust this to your install path:
+pytesseract.pytesseract.tesseract_cmd = r"path/to/tesseract.exe"
+
 
 # Tesseract page-segmentation mode. 3 = fully automatic (good default for letters);
 # try 6 ("assume a single uniform block") if a page is one column of text.
@@ -40,7 +40,7 @@ def ocr_pdf(pdf_path) -> str:
     doc = fitz.open(pdf_path)
     pages = []
     for page in doc:
-        # 3x render is a good speed/quality balance; bump to Matrix(4,4) only if small text is being missed.
+        # 3x render is a good speed/quality balance, bump to Matrix(4,4) only if small text is being missed.
         pix = page.get_pixmap(matrix=fitz.Matrix(3, 3))
         image = Image.open(io.BytesIO(pix.tobytes("png")))
         pages.append(ocr_image(image))
