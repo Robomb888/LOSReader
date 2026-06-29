@@ -52,6 +52,12 @@
       "label": "Criteria met and clinical rationale described"
     },
     {
+      "field": "clinician_experience_in_gender_dysphoria",
+      "type": "exists",
+      "value": true,
+      "label": "Experienced in assessment/treatment of GD"
+    },
+    {
       "field": "informed_consent_obtained",
       "type": "boolean",
       "value": true,
