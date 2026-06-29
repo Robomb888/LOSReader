@@ -94,5 +94,5 @@ FIELD_REGISTRY = {
 
 FIELD_EXCEPTIONS = ["behavioral_health_remission_months", "hormone_duration_months", "months_living_as_identified_gender",
 "psychotherapy_duration_months", "clinical_relationship_duration_described", "favorable_psychosocial_behavioral_eval",
-"understands_reproductive_effects"
+"understands_reproductive_effects", "diagnostic_assessment_included"
 ]

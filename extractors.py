@@ -134,8 +134,10 @@ def understands_risks(text):
 
     re.compile(r"\b(understand\w*|discuss\w*|inform\w*)\s(of)?(the)?(potential)?\w*(risks?|effects?|complications?)\b", re.I)
 
-
 def favorable_psychosocial_behavioral_eval(text):
+    return None
+
+def favorable_psychosocial_behavioral_eval_old(text):
     return _both(text,
         re.compile(r"\b(reason\w+|well|adaquat\w+|stabl\w+)\b", re.I),
         re.compile(r"\b(control\w+|stabl\w+|managed|hous\w+)\b", re.I))
@@ -152,7 +154,7 @@ _DEGREE_RE = re.compile(
     r"\b(ph\.?\s?d|dnp|psy\.?\s?d|m\.?\s?s\.?\s?w|m\.?\s?s\.?\s?n|ed\.?\s?d|"
     r"d\.?\s?w\.?\s?m|m\.?\s?d|m\.?\s?a|m\.?\s?ed|m\.?\s?s|d\.?\s?o)", re.I)
 _LIC_RE = re.compile(
-    r"(l\.?p|lc?pc|li?csw|lgsw|lmft|lmsw|lc?mhc|cmhc|lpc?c|pmhnp)\b", re.I)
+    r"(l\.?p|lc?pc|li?csw|lgsw|lmft|lmsw|lc?mhc|cmhc|lpc?c)\b", re.I)
  
  
 def clinician_masters_degree_or_above(text):       # was clinician.extract
