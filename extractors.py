@@ -67,7 +67,7 @@ def _months_near(text, anchor):
 # routing critical (original)
 def _extract_dob(text):
     patterns = [
-        r'(?:date of birth|dob)\s*[:\-]?\s*([0-9]{1,2}[\-][0-9]{1,2}[\-][0-9]{2,4})',
+        r'(?:date of birth|dob)\s*[:\-]?\s*([0-9]{1,2}[\/-][0-9]{1,2}[\/-][0-9]{2,4})',
         r'(?:date of birth|dob)\s*[:\-]?\s*([A-Za-z]+\s+\d{1,2},?\s+\d{4})',
         r'([A-Za-z]+\s+\d{1,2},?\s+\d{4}).*(?:date of birth|dob)'
     ]
@@ -194,7 +194,7 @@ def clinician_credentials_from_licensing_board(text):
     return None
 
 
-_CLIN_EXPERIENCE = (r"(?:experienced?(?:in|with)?|training|expertise|knowledge|specializ\w+|"
+_CLIN_EXPERIENCE = (r"(?:experienced?(?:in|with)|training|clinical\sexperience|expertise|knowledge|specializ\w+|"
                     r"competen\w+|years?\s+(?:of\s+)?(?:work|practice|treating))")
 _CLIN_GENDER = (r"(?:gender\s+dysphoria|gender[-\s]?nonconforming|transgender|"
                 r"gender[-\s]?affirming|gender\s+identity|gender\s+health|lgbtq)")
@@ -345,8 +345,8 @@ def comorbid_conditions_assessed(text):
 
 def significant_concerns_well_controlled(text):
     return _find_all(text, [re.compile(p, re.I) for p in (
-        r"\b(mental\s+health|psychiatric|diagnoses|behavioral|medical\s+condition|comorbid\w*|concern|condition|depress\w*|anxiety|mood|disorder|illness|symptom|co-?occurring|co-?existing|other\s+condition)\b",
-        r"(procedure|surgery|operation|treatment|intervention|goals?)|(affect(s|ed|ing)?|impact(s|ed|ing)?|interfere(s|d|ing)?(\s+with)?|prevent(s|ed|ing)?|compromise(s|d|ing))|assessed|evaluat\w*|address\w*|review\w*|consider\w*|screen\w*|(well\s*-*)?(controlled|managed)|stable|in\s+(stable\s+)?remission|controlled|managed|adequately\s+(managed|controlled)\b")],
+        r"\b(mental\s+health\s(?:concerns?|conditions?|issues?|diagnos\w+)|psychiatric|diagnoses|behavioral|medical\s+condition|comorbid\w*|concern|condition|depress\w*|anxiety|mood|disorder|illness|symptom|co-?occurring|co-?existing|other\s+condition)\b",
+        r"(procedure|surgery|operation|treatment|intervention)|(affect(s|ed|ing)?|impact(s|ed|ing)?|interfere(s|d|ing)?(\s+with)?|prevent(s|ed|ing)?|compromise(s|d|ing))|assessed|evaluat\w*|address\w*|review\w*|consider\w*|screen\w*|(well\s*-*)?(controlled|managed)|stable|in\s+(stable\s+)?remission|controlled|managed|adequately\s+(managed|controlled)\b")],
         [re.compile(_CLIN_EXPERIENCE, re.I)])
 
 def understands_reproductive_effects(text):
